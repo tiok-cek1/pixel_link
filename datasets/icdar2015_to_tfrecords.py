@@ -2,13 +2,13 @@
 import numpy as np;
 import tensorflow as tf
 import util
-from dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
+from .dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
 import config
         
 
 def cvt_to_tfrecords(output_path , data_path, gt_path):
     image_names = util.io.ls(data_path, '.jpg')#[0:10];
-    print "%d images found in %s"%(len(image_names), data_path);
+    print("%d images found in %s"%(len(image_names), data_path));
     with tf.python_io.TFRecordWriter(output_path) as tfrecord_writer:
         for idx, image_name in enumerate(image_names):
             oriented_bboxes = [];
@@ -16,7 +16,7 @@ def cvt_to_tfrecords(output_path , data_path, gt_path):
             labels = [];
             labels_text = [];
             path = util.io.join_path(data_path, image_name);
-            print "\tconverting image: %d/%d %s"%(idx, len(image_names), image_name);
+            print("\tconverting image: %d/%d %s"%(idx, len(image_names), image_name));
             image_data = tf.gfile.FastGFile(path, 'r').read()
             
             image = util.img.imread(path, rgb = True);

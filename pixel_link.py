@@ -131,7 +131,7 @@ def cal_gt_for_single_image(normed_xs, normed_ys, labels):
         
         bbox_mask = mask.copy()
         
-        bbox_points = zip(bbox_xs, bbox_ys)
+        bbox_points = list(zip(bbox_xs, bbox_ys))
         bbox_contours = util.img.points_to_contours(bbox_points)
         util.img.draw_contours(bbox_mask, bbox_contours, idx = -1, 
                                color = 1, border_width = -1)
@@ -184,8 +184,8 @@ def cal_gt_for_single_image(normed_xs, normed_ys, labels):
                 per_pixel_weight = per_bbox_weight / num_bbox_pixels
                 pixel_cls_weight += bbox_positive_pixel_mask * per_pixel_weight
         else:
-            raise ValueError, 'pixel_cls_weight_method not supported:%s'\
-                        %(pixel_cls_weight_method)
+            raise ValueError('pixel_cls_weight_method not supported:%s'\
+                        %(pixel_cls_weight_method))
 
     
         ## calculate the labels and weights of links
@@ -207,7 +207,7 @@ def cal_gt_for_single_image(normed_xs, normed_ys, labels):
         pixel_cls_weight[bbox_border_cords] *= pixel_cls_border_weight_lambda
         
         ### change link labels according to their neighbour status
-        border_points = zip(*bbox_border_cords)
+        border_points = list(zip(*bbox_border_cords))
         def in_bbox(nx, ny):
             return bbox_positive_pixel_mask[ny, nx]
         
@@ -254,7 +254,7 @@ def decode_batch(pixel_cls_scores, pixel_link_scores,
     
     batch_size = pixel_cls_scores.shape[0]
     batch_mask = []
-    for image_idx in xrange(batch_size):
+    for image_idx in range(batch_size):
         image_pos_pixel_scores = pixel_cls_scores[image_idx, :, :]
         image_pos_link_scores = pixel_link_scores[image_idx, :, :, :]    
         mask = decode_image(
@@ -319,7 +319,7 @@ def rect_to_xys(rect, image_shape):
         return y
     
     rect = ((rect[0], rect[1]), (rect[2], rect[3]), rect[4])
-    points = cv2.cv.BoxPoints(rect)
+    points = cv2.boxPoints(rect)
     points = np.int0(points)
     for i_xy, (x, y) in enumerate(points):
         x = get_valid_x(x)
@@ -350,7 +350,7 @@ def mask_to_bboxes(mask, image_shape =  None, min_area = None,
     mask = util.img.resize(img = mask, size = (image_w, image_h), 
                            interpolation = cv2.INTER_NEAREST)
     
-    for bbox_idx in xrange(1, max_bbox_idx + 1):
+    for bbox_idx in range(1, max_bbox_idx + 1):
         bbox_mask = mask == bbox_idx
 #         if bbox_mask.sum() < 10:
 #             continue

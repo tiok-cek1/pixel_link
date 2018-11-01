@@ -1,4 +1,4 @@
-from __future__ import print_function
+
 from pprint import pprint
 import numpy as np
 from tensorflow.contrib.slim.python.slim.data import parallel_reader
@@ -154,7 +154,7 @@ def init_config(image_shape, batch_size = 1,
     num_clones = len(gpus)
     
     global clone_scopes
-    clone_scopes = ['clone_%d'%(idx) for idx in xrange(num_clones)]
+    clone_scopes = ['clone_%d'%(idx) for idx in range(num_clones)]
     
     _set_batch_size(batch_size)
     

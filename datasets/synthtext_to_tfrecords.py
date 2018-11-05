@@ -1,15 +1,13 @@
 #encoding=utf-8
 import numpy as np;
 import tensorflow as tf
-import util;
-from .dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
+from pylib.src import util
+from dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
 
 # encoding = utf-8
 import numpy as np    
 import time
 import config
-import util  
-
 
 class SynthTextDataFetcher():
     def __init__(self, mat_path, root_path):

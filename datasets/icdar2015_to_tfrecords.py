@@ -1,11 +1,10 @@
 #encoding=utf-8
 import numpy as np;
 import tensorflow as tf
-import util
-from .dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
+from pylib.src import util
+from dataset_utils import int64_feature, float_feature, bytes_feature, convert_to_example
 import config
         
-
 def cvt_to_tfrecords(output_path , data_path, gt_path):
     image_names = util.io.ls(data_path, '.jpg')#[0:10];
     print("%d images found in %s"%(len(image_names), data_path));
@@ -17,7 +16,7 @@ def cvt_to_tfrecords(output_path , data_path, gt_path):
             labels_text = [];
             path = util.io.join_path(data_path, image_name);
             print("\tconverting image: %d/%d %s"%(idx, len(image_names), image_name));
-            image_data = tf.gfile.FastGFile(path, 'r').read()
+            image_data = tf.gfile.FastGFile(path, 'rb').read()
             
             image = util.img.imread(path, rgb = True);
             shape = image.shape
@@ -30,6 +29,8 @@ def cvt_to_tfrecords(output_path , data_path, gt_path):
             lines = util.io.read_lines(gt_filepath);
                 
             for line in lines:
+                # remove BOM
+                line = util.str.remove_all(line, '\ufeff')
                 line = util.str.remove_all(line, '\xef\xbb\xbf')
                 gt = util.str.split(line, ',');
                 oriented_box = [int(gt[i]) for i in range(8)];
@@ -45,13 +46,13 @@ def cvt_to_tfrecords(output_path , data_path, gt_path):
                 bboxes.append([xmin, ymin, xmax, ymax])
 
                 # might be wrong here, but it doesn't matter because the label is not going to be used in detection
-                labels_text.append(gt[-1]); 
+                labels_text.append(gt[-1].encode()); 
                 ignored = util.str.contains(gt[-1], '###')
                 if ignored:
                     labels.append(config.ignore_label);
                 else:
                     labels.append(config.text_label)
-            example = convert_to_example(image_data, image_name, labels, labels_text, bboxes, oriented_bboxes, shape)
+            example = convert_to_example(image_data, image_name.encode(), labels, labels_text, bboxes, oriented_bboxes, shape)
             tfrecord_writer.write(example.SerializeToString())
         
 if __name__ == "__main__":

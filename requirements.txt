@@ -21,14 +21,12 @@ Markdown==3.0.1
 matplotlib==2.2.2
 mock==2.0.0
 numpy==1.15.3
-olefile==0.44
 opencv-python==3.4.3.18
 pbr==1.10.0
 Pillow==4.3.0
 Polygon3==3.0.8
 protobuf==3.4.0
 public==2.0.1
-pycparser==2.19
 pyOpenSSL==18.0.0
 pyparsing==2.2.0
 python-dateutil==2.7.2

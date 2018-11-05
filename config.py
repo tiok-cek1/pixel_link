@@ -117,7 +117,7 @@ def _set_image_shape(shape):
     assert h % 4 == 0
     
     train_image_shape = [h, w]
-    score_map_shape = (h / strides[0], w / strides[0])
+    score_map_shape = (h // strides[0], w // strides[0])
     image_shape = train_image_shape
 
 def _set_batch_size(bz):
@@ -159,7 +159,7 @@ def init_config(image_shape, batch_size = 1,
     _set_batch_size(batch_size)
     
     global batch_size_per_gpu
-    batch_size_per_gpu = batch_size / num_clones
+    batch_size_per_gpu = batch_size // num_clones
     if batch_size_per_gpu < 1:
         raise ValueError('Invalid batch_size [=%d], \
                 resulting in 0 images per gpu.'%(batch_size))

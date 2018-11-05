@@ -1,8 +1,7 @@
 Code for the AAAI18 paper [PixelLink: Detecting Scene Text via Instance Segmentation](https://arxiv.org/abs/1801.01315), by Dan Deng, Haifeng Liu, Xuelong Li, and Deng Cai.
 
-Contributions to this repo are welcome, e.g., some other backbone networks (including the model definition and pretrained models).
-
-PLEASE CHECK EXSITING ISSUES BEFORE OPENNING YOUR OWN ONE. IF A SAME OR SIMILAR ISSUE HAD BEEN POSTED BEFORE, JUST REFER TO IT, AND DO NO OPEN A NEW ONE.
+Python 3.6 using 2to3-3.6 with some modification
+used pip instead of conda
 
 # Installation
 ## Clone the repo
@@ -18,20 +17,8 @@ export PYTHONPATH=${pixel_link_root}/pylib/src:$PYTHONPATH
 ```
 
 ## Prerequisites
- (Only tested on) Ubuntu14.04 and 16.04 with:
-* Python 2.7
-* Tensorflow-gpu >= 1.1
-* opencv2
-* setproctitle
-* matplotlib
-
-Anaconda is recommended to for an easier installation:
-
-1. Install [Anaconda](https://anaconda.org/)
-2. Create and activate the required virtual environment by:
 ```
-conda env create --file pixel_link_env.txt
-source activate pixel_link
+pip install -r requirements.txt
 ```
 
 # Testing
@@ -45,6 +32,7 @@ Unzip the downloaded model. It contains 4 files:
 * model.ckpt-xxx.data-00000-of-00001
 * model.ckpt-xxx.index  
 * model.ckpt-xxx.meta
+Note: need to convert config.py to python 3.6
 
 Denote their parent directory as `${model_path}`.
 
@@ -79,6 +67,7 @@ Put the images to be tested in a single directory, i.e., `${image_dir}`. Then:
 ```
 cd ${pixel_link_root}
 ./scripts/test_any.sh ${GPU_ID} ${model_path}/model.ckpt-xxx ${image_dir}
+./scripts/cpu.sh ${model_path}/model.ckpt-xxx ${image_dir}
 ```
 For example:
 ```

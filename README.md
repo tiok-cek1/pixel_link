@@ -1,7 +1,7 @@
 Code for the AAAI18 paper [PixelLink: Detecting Scene Text via Instance Segmentation](https://arxiv.org/abs/1801.01315), by Dan Deng, Haifeng Liu, Xuelong Li, and Deng Cai.
 
-Python 3.6 using 2to3-3.6 with some modification
-used pip instead of conda
+Python 3.6 using 2to3-3.6 with some modifications.
+Used pip instead of conda
 
 Note: this code still has a problem with optimization, loss can suddenly shoot to nan.
 

@@ -184,7 +184,7 @@ def sum_gradients(clone_grads):
 
 def create_clones(batch_queue):        
     with tf.device('/cpu:0'):
-        global_step = slim.create_global_step()
+        global_step = tf.train.create_global_step()
         learning_rate = tf.constant(FLAGS.learning_rate, name='learning_rate')
         optimizer = tf.train.MomentumOptimizer(learning_rate, 
                                momentum=FLAGS.momentum, name='Momentum')

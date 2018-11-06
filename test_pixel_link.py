@@ -107,7 +107,7 @@ def test():
                                                    is_training = False)
         b_image = tf.expand_dims(processed_image, axis = 0)
         net = pixel_link_symbol.PixelLinkNet(b_image, is_training = True)
-        global_step = slim.get_or_create_global_step()
+        global_step = tf.train.get_or_create_global_step()
 
     
     sess_config = tf.ConfigProto(log_device_placement = False, allow_soft_placement = True)

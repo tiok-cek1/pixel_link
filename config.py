@@ -71,6 +71,8 @@ pixel_cls_border_weight_lambda = 1.0
 pixel_cls_loss_weight_lambda = 2.0
 pixel_link_neg_loss_weight_lambda = 1.0
 pixel_link_loss_weight = 1.0
+
+oriented_bbox = False
 #====================Training and model params END ==================
 #=====================================================================
 

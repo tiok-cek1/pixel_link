@@ -68,7 +68,7 @@ def config_initialization():
 def test():
     checkpoint_dir = util.io.get_dir(FLAGS.checkpoint_path)
     
-    global_step = slim.get_or_create_global_step()
+    global_step = tf.train.get_or_create_global_step()
     with tf.name_scope('evaluation_%dx%d'%(FLAGS.eval_image_height, FLAGS.eval_image_width)):
         with tf.variable_scope(tf.get_variable_scope(), reuse = False):
             image = tf.placeholder(dtype=tf.int32, shape = [None, None, 3])

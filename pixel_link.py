@@ -292,10 +292,17 @@ def min_area_rect(cnt):
     Return:
         the oriented rects sorrounding the box, in the format:[cx, cy, w, h, theta]. 
     """
-    rect = cv2.minAreaRect(cnt)
-    cx, cy = rect[0]
-    w, h = rect[1]
-    theta = rect[2]
+    import config
+    if config.oriented_bbox:
+        rect = cv2.minAreaRect(cnt)
+        cx, cy = rect[0]
+        w, h = rect[1]
+        theta = rect[2]
+    else:
+        cx, cy, w, h = cv2.boundingRect(cnt)
+        cx += w // 2
+        cy += h // 2
+        theta = 0
     box = [cx, cy, w, h, theta]
     return box, w * h
 

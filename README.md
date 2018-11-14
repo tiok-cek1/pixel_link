@@ -1,12 +1,26 @@
 Code for the AAAI18 paper [PixelLink: Detecting Scene Text via Instance Segmentation](https://arxiv.org/abs/1801.01315), by Dan Deng, Haifeng Liu, Xuelong Li, and Deng Cai.
 
-Python 3.6 using 2to3-3.6 with some modification
-used pip instead of conda
+# Pixel Link python 3.6
 
-Note: this code still has a problem with optimization, loss can suddenly shoot to nan.
+Python 3.6 using 2to3-3.6 with some modification   
+Used pip instead of conda
 
-# Installation
-## Clone the repo
+Note: this code still has a problem with optimization, loss can suddenly shoot to **nan**.   
+Working with 2 GPUs, batch size per GPU 4. batch_size = 8
+```
+bash scripts/train.sh 0,1 4 &
+```   
+pixel conf = 0.8, link conf = 0.8, width = 512, height = 512 (training, based on paper)   
+pixel conf = 0.5, link conf = 0.5, width = 512, height = 512 (inference)   
+Training 8000 global steps: test some images, **no bbox found** (4001 - 8000 loss between 1.5 ~ 0.9).   
+Training 12000 global steps: some bboxes appear (8001 - 12000 loss between 1.1 ~ 0.7).   
+Training 16000 global steps: more bboxes appear, improved (12001 - 16000 loss between 1.1 ~ 0.6).   
+During training, simply ignore this warning "Bounding box (148,1161,172,1224) is completely outside the image and will not be drawn."
+
+Change config.py `oriented_bbox = True` to default (paper) bbox, `False` to straight bbox.
+
+## Installation
+### Clone the repo
 ```
 git clone --recursive git@github.com:ZJULearning/pixel_link.git
 ```
@@ -18,13 +32,13 @@ Add the path of `${pixel_link_root}/pylib/src` to your `PYTHONPATH`:
 export PYTHONPATH=${pixel_link_root}/pylib/src:$PYTHONPATH
 ```
 
-## Prerequisites
+### Prerequisites
 ```
 pip install -r requirements.txt
 ```
 
-# Testing
-## Download the pretrained model
+## Testing
+### Download the pretrained model
 * PixelLink + VGG16 4s [Baidu Netdisk](https://pan.baidu.com/s/1jsOc-cutC4GyF-wMMyj5-w) | [GoogleDrive](https://drive.google.com/file/d/19mlX5W8OBalSjhf5oTTS6qEq2eAU8Tg9/view?usp=sharing), trained on IC15
 * PixelLink + VGG16 2s [Baidu Netdisk](https://pan.baidu.com/s/1asSFsRSgviU2GnvGt2lAUw) | [GoogleDrive](https://drive.google.com/file/d/1QleZxu_6PSI733G7wzbqeFtc8A3-LmWW/view?usp=sharing), trained on IC15
 
@@ -38,7 +52,7 @@ Note: need to convert config.py to python 3.6
 
 Denote their parent directory as `${model_path}`.
 
-## Test on ICDAR2015
+### Test on ICDAR2015
 The reported results on ICDAR2015  are:
 
 |Model|Recall|Precision|F-mean|
@@ -64,7 +78,7 @@ Here are some samples:
 ![./samples/img_249_pred.jpg](./samples/img_249_pred.jpg)
 
 
-## Test on any images
+### Test on any images
 Put the images to be tested in a single directory, i.e., `${image_dir}`. Then:
 ```
 cd ${pixel_link_root}
@@ -81,12 +95,12 @@ The program will visualize the detection results directly on images.   If the de
 1. Adjust the inference parameters like `eval_image_width`, `eval_image_height`, `pixel_conf_threshold`, `link_conf_threshold`.
 2. Or train your own model.
 
-# Training
-## Converting the dataset to tfrecords files
+## Training
+### Converting the dataset to tfrecords files
 Scripts for converting ICDAR2015 and SynthText datasets have been provided in the `datasets` directory.
  It not hard to write a converting script  for your own dataset.
 
-## Train your own model
+### Train your own model
 
 * Modify `scripts/train.sh` to configure your dataset name and dataset path like:
 ```
@@ -101,6 +115,6 @@ For example, `./scripts/train.sh 0,1,2 8`.
 
 The existing training strategy in `scripts/train.sh` is configured for icdar2015, modify it if necessary.  A lot of training or model options  are available in `config.py`, try it yourself if you are interested.
 
-# Acknowlegement
+## Acknowlegement
 ![](http://www.cad.zju.edu.cn/templets/default/imgzd/logo.jpg)
 ![](http://www.cvte.com/images/logo.png)

@@ -28,11 +28,13 @@ python train_pixel_link.py \
             --gpu_memory_fraction=-1 \
             --train_image_width=512 \
             --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
             --batch_size=${BATCH_SIZE}\
             --dataset_dir=${DATASET_DIR} \
             --dataset_name=${DATASET} \
             --dataset_split_name=train \
-            --max_number_of_steps=100\
+            --max_number_of_steps=100 \
             --checkpoint_path=${CKPT_PATH} \
             --using_moving_average=1
 
@@ -43,11 +45,157 @@ python train_pixel_link.py \
             --gpu_memory_fraction=-1 \
             --train_image_width=512 \
             --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=4000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=8000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=12000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=16000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=20000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=24000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=28000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
+            --batch_size=${BATCH_SIZE}\
+            --dataset_dir=${DATASET_DIR} \
+            --dataset_name=${DATASET} \
+            --dataset_split_name=train \
+	    --max_number_of_steps=32000 \
+            --checkpoint_path=${CKPT_PATH} \
+            --using_moving_average=1 \
+            2>&1 | tee -a ${TRAIN_DIR}/log.log                        
+
+python train_pixel_link.py \
+            --train_dir=${TRAIN_DIR} \
+            --num_gpus=${NUM_GPUS} \
+            --learning_rate=1e-2\
+            --gpu_memory_fraction=-1 \
+            --train_image_width=512 \
+            --train_image_height=512 \
+	    --pixel_conf_threshold=0.8 \
+            --link_conf_threshold=0.8 \
             --batch_size=${BATCH_SIZE}\
             --dataset_dir=${DATASET_DIR} \
             --dataset_name=${DATASET} \
             --dataset_split_name=train \
             --checkpoint_path=${CKPT_PATH} \
-            --using_moving_average=1\
+            --using_moving_average=1 \
             2>&1 | tee -a ${TRAIN_DIR}/log.log                        
 

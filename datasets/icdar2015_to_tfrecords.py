@@ -31,7 +31,7 @@ def cvt_to_tfrecords(output_path , data_path, gt_path):
             for line in lines:
                 # remove BOM
                 line = util.str.remove_all(line, '\ufeff')
-                line = util.str.remove_all(line, '\xef\xbb\xbf')
+                line = util.str.remove_invisible(line)
                 gt = util.str.split(line, ',');
                 oriented_box = [int(gt[i]) for i in range(8)];
                 oriented_box = np.asarray(oriented_box) / ([w, h] * 4);

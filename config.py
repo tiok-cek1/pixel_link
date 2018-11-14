@@ -142,8 +142,8 @@ def  _set_train_with_ignored(train_with_ignored_):
 def init_config(image_shape, batch_size = 1, 
                 weight_decay = 0.0005, 
                 num_gpus = 1, 
-                pixel_conf_threshold = 0.6,
-                link_conf_threshold = 0.9):
+                pixel_conf_threshold = 0.8,
+                link_conf_threshold = 0.8):
     _set_seg_th(pixel_conf_threshold, link_conf_threshold)
     _set_weight_decay(weight_decay)
     _set_image_shape(image_shape)

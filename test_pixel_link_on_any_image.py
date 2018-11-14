@@ -13,6 +13,7 @@ import cv2
 import pixel_link
 from nets import pixel_link_symbol
 
+import time
 
 slim = tf.contrib.slim
 import config
@@ -109,6 +110,8 @@ def test():
         
         for image_name in files:
             file_path = util.io.join_path(FLAGS.dataset_dir, image_name)
+            print(file_path)
+            start = time.time()
             image_data = util.img.imread(file_path)
             link_scores, pixel_scores, mask_vals = sess.run(
                     [net.link_pos_scores, net.pixel_pos_scores, masks],
@@ -136,10 +139,13 @@ def test():
             mask = resize(mask)
             pixel_score = resize(pixel_score)
 
+            end = time.time()
+            print('{0} bbox detected in {1}s'.format(len(bboxes_det), (end-start)))
+
             draw_bboxes(image_data, bboxes_det, util.img.COLOR_RGB_RED)
 #             print util.sit(pixel_score)
 #             print util.sit(mask)
-            print(util.sit(image_data))
+            print(util.sit(image_data), '\n')
                 
         
 def main(_):

@@ -2,7 +2,7 @@ Code for the AAAI18 paper [PixelLink: Detecting Scene Text via Instance Segmenta
 
 # Pixel Link python 3.6
 
-Python 3.6 using 2to3-3.6 with some modification   
+Python 3.6 using 2to3-3.6 with some modifications.   
 Used pip instead of conda
 
 Note: this code still has a problem with optimization, loss can suddenly shoot to **nan**.   
